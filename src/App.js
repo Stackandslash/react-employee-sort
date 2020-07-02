@@ -16,15 +16,14 @@ export default App;
 /*/
 We want the following:
 
-A list of employees, with several categories of details.
+An array of employees, with (possibly) several categories of details.
  An element that can be used to build the display of this list on the page.
- A search bar that can be used to build a modified list to be displayed.
+ 
+ COMPONENT A search bar that can be used to build a modified list to be displayed.
   This can be static on the page. Example didn't have a Search button. 
    Feel we may want to look into one for ourselves.
- A search bar that can be used to build a modified list to be displayed.
 
 COMPONENT A for/for each loop to place one of these elements for each employee given.
- THIS RUNS FIRST
  This will take a prop object of the employees desired, and build the display of these employees, returning the full build.
  This will be called by the filter, and will return the full build.
 
