@@ -13,17 +13,17 @@ const fullList = [
 function Filter(prop){
     //console.log("Filtering for:");
     //console.log(prop);
-    
+
     //filter functionality goes here.
-    let tempFilteredList;
+    let filteredList;
     if (prop === ""){
-        tempFilteredList = fullList;
+        filteredList = fullList;
     }
     else{
-        tempFilteredList = fullList.filter(object => object.name.includes(prop));
+        filteredList = fullList.filter(object => object.name.includes(prop));
     }
-    const filteredList = tempFilteredList;
-    return render(filteredList);
+    let renderedList = render(filteredList);
+    return renderedList;
 }
 
 export default Filter;
