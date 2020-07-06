@@ -10,17 +10,17 @@ const fullList = [
     }
 ]
 
-function Filter(prop){
-    //console.log("Filtering for:");
-    //console.log(prop);
+function Filter(props){
+    console.log("Filtering for:");
+    console.log(props);
 
     //filter functionality goes here.
     let filteredList;
-    if (prop === ""){
+    if (props.name === ""){
         filteredList = fullList;
     }
     else{
-        filteredList = fullList.filter(object => object.name.includes(prop));
+        filteredList = fullList.filter(object => object.name.includes(props));
     }
     let renderedList = render(filteredList);
     return renderedList;

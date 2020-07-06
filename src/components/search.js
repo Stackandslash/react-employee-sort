@@ -4,14 +4,15 @@ import Filter from "./filter.js";
 //This can be static on the page. Example didn't have a Search button. 
 //Feel we may want to look into one for ourselves.
 
-function SearchFunction() {
+function SearchFunction(props) {
   return (
     <div className="searchDiv">
       <form>
         <label htmlFor="filter">Filter</label><br/>
         <input type="text" id="filter" name="filter" onChange={(event) => {
+          console.log("Onchange")
           let filterBoxText = event.target.value;
-        Filter(filterBoxText)}}/>
+        props.searchFilter(filterBoxText)}}/>
       </form>
     </div>
   );
