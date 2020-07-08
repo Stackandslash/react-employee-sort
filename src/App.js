@@ -5,7 +5,7 @@ import Search from "./components/Search.js";
 
 
 // const searchBar = SearchFunction();
-const employees = [
+const employeesOrigin = [
   {
     name: "Bob",
     position: "Bobber",
@@ -22,21 +22,53 @@ const employees = [
     name: "Ben",
     position: "Bender",
     email: "Ben@Bob.Ber",
-    kay: 3
+    key: 3
+  },
+  {
+    name: "Bjorn",
+    position: "Bjorn Identifier",
+    email: "Bjorn@Bob.Ber",
+    key: 4
+  },
+  {
+    name: "Jakoval",
+    position: "Jakoval Trader",
+    email: "Jakoval@Bob.Ber",
+    key: 5
+  },
+  {
+    name: "Adam",
+    position: "Adam Smasher",
+    email: "Adam@Bob.Ber",
+    key: 6
   },
 ]
+
+let employees = employeesOrigin;
+let sortType = "unsorted";
+
+function alphaSort(sortList) {
+  console.log("Sortin'");
+
+  switch (sortType) {
+    case "down":
+      return sortList.reverse();
+    default:
+      sortType = "down"
+      return sortList.sort((compareOne, compareTwo) => compareOne.name.localeCompare(compareTwo.name));
+  }
+}
 
 class App extends Component {
 
   state = {
-    employees
+    stateEmployees : employees
   };
 
   searchFilter = searchValue => {
-    console.log("Searchfilter")
     let sortedEmployees = employees.filter(employee => employee.name.includes(searchValue));
     this.setState({
-      employees: sortedEmployees
+      stateEmployees: sortedEmployees
     })
   }
 
@@ -45,9 +77,11 @@ class App extends Component {
     <div className="App">
       <div><Search 
       searchFilter={this.searchFilter}
-      /></div>
+      />
+      <button type="button" onClick={() => console.log(alphaSort(this.state.stateEmployees))}>Name Alphasort</button>
+      </div>
       <div id="resultList">{
-      this.state.employees.map(employee => (
+      this.state.stateEmployees.map(employee => (
           <EmployeeCard
             key={employee.key}
             name={employee.name}
