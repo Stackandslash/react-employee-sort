@@ -1,0 +1,9 @@
+.searchBox {
+  /* border-radius: 10%; */
+  height: 25%;
+  margin: auto;
+  position: relative;
+  width: 75%;
+  text-align: center;
+  font-size: 22px;
+}

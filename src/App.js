@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import EmployeeCard from "./components/EmployeeCard";
 import "./App.css";
-import Search from "./components/Search.js";
+import Search from "./components/Search/Search.js";
 
 // const searchBar = SearchFunction();
 const employeesOrigin = [
