@@ -1,8 +1,7 @@
-import React, {Component} from 'react';
-import EmployeeCard from"./components/EmployeeCard";
-import './App.css';
+import React, { Component } from "react";
+import EmployeeCard from "./components/EmployeeCard";
+import "./App.css";
 import Search from "./components/Search.js";
-
 
 // const searchBar = SearchFunction();
 const employeesOrigin = [
@@ -10,89 +9,111 @@ const employeesOrigin = [
     name: "Bob",
     position: "Bobber",
     email: "Bob@Bob.Ber",
-    key: 1
+    key: 1,
   },
   {
     name: "Bill",
     position: "Billing",
     email: "Bill@Bob.Ber",
-    key: 2
+    key: 2,
   },
   {
     name: "Ben",
     position: "Bender",
     email: "Ben@Bob.Ber",
-    key: 3
+    key: 3,
   },
   {
     name: "Bjorn",
     position: "Bjorn Identifier",
     email: "Bjorn@Bob.Ber",
-    key: 4
+    key: 4,
   },
   {
     name: "Jakoval",
     position: "Jakoval Trader",
     email: "Jakoval@Bob.Ber",
-    key: 5
+    key: 5,
   },
   {
     name: "Adam",
     position: "Adam Smasher",
     email: "Adam@Bob.Ber",
-    key: 6
+    key: 6,
   },
-]
+];
 
 let employees = employeesOrigin;
-let sortType = "unsorted";
 
-function alphaSort(sortList) {
-  console.log("Sortin'");
-
+const alphaSort = (sortList, sortType) => {
+  //This is a switch primarily to allow for future variations on the search function. Right now, it's just checking if it needs to invert the name search or not. Since the only way to reach a 'down' state here is via the default sort option, the 'down' case just inverts the existing list.
+  //Probably going to refactor this to merge the qualifying if and this switch eventually.
   switch (sortType) {
     case "down":
       return sortList.reverse();
+
     default:
-      sortType = "down"
-      return sortList.sort((compareOne, compareTwo) => compareOne.name.localeCompare(compareTwo.name));
+      return sortList.sort((compareOne, compareTwo) =>
+        compareOne.name.localeCompare(compareTwo.name)
+      );
   }
-}
+};
 
 class App extends Component {
-
   state = {
-    stateEmployees : employees
+    stateEmployees: employees,
+    sortType: "unsorted",
   };
 
-  searchFilter = searchValue => {
-    let sortedEmployees = employees.filter(employee => employee.name.includes(searchValue));
+  //This is our filtering function. It could be compressed to a single line, if/when needed. It takes a searchValue, then filters our root employees list to entries that include it in the name key.
+  searchFilter = (searchValue) => {
+    let sortedEmployees = employees.filter((employee) =>
+      employee.name.includes(searchValue)
+    );
     this.setState({
-      stateEmployees: sortedEmployees
-    })
-  }
-
-  render(){
-    return (
-    <div className="App">
-      <div><Search 
-      searchFilter={this.searchFilter}
-      />
-      <button type="button" onClick={() => console.log(alphaSort(this.state.stateEmployees))}>Name Alphasort</button>
-      </div>
-      <div id="resultList">{
-      this.state.stateEmployees.map(employee => (
-          <EmployeeCard
-            key={employee.key}
-            name={employee.name}
-            position={employee.position}
-            email={employee.email}
-          />
-        ))}</div>
-    </div>
-    )
+      stateEmployees: sortedEmployees,
+    });
   };
-};
+
+  render() {
+    return (
+      <div className="App">
+        <div>
+          <Search searchFilter={this.searchFilter} />
+          <button
+            type="button"
+            onClick={() => {
+              console.log(
+                alphaSort(this.state.stateEmployees, this.state.sortType)
+              );
+              if (this.state.sortType === "down") {
+                this.setState({
+                  sortType: "up",
+                });
+              } else {
+                this.setState({
+                  sortType: "down",
+                });
+              }
+            }}
+          >
+            Name Alphasort
+          </button>
+        </div>
+        <div id="resultList">
+          {this.state.stateEmployees.map((employee) => (
+            <EmployeeCard
+              key={employee.key}
+              name={employee.name}
+              position={employee.position}
+              email={employee.email}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+}
 export default App;
 
 /*/
